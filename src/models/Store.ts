@@ -36,10 +36,10 @@ class Store {
   public_place: string;
 
   @Column()
-  number: number;
+  house_number: number;
 
   @Column()
-  phone_number: number;
+  phone_number: string;
 
   @Column()
   score: number;

@@ -1,13 +1,10 @@
 module.exports = {
   "type" : "postgres",
-  "host" : "",
+  "host" : "127.0.0.1",
   "port" : 5432,
-  "username" : "",
-  "password" : "",
-  "database" : "",
-  "extra": {
-    "ssl": true
-    },
+  "username" : "postgres",
+  "password" : "postgres",
+  "database" : "cheerMeUp",
   "entities": [
     "./src/models/*.ts"
   ],

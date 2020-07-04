@@ -12,8 +12,8 @@ interface Request {
   city: string;
   neighborhood: string;
   public_place: string;
-  number: number;
-  phone_number: number;
+  house_number: number;
+  phone_number: string;
 }
 
 class CreateStoreService {
@@ -26,7 +26,7 @@ class CreateStoreService {
     city,
     neighborhood,
     public_place,
-    number,
+    house_number,
     phone_number,
   }: Request): Promise<Store> {
     const storeRepository = getRepository(Store);
@@ -59,7 +59,7 @@ class CreateStoreService {
       password,
       city,
       neighborhood,
-      number,
+      house_number,
       cnpj,
       phone_number,
       public_place,

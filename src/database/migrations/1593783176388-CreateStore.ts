@@ -55,7 +55,7 @@ export default class CreateStore1593783176388 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'number',
+            name: 'house_number',
             type: 'int',
             isNullable: false,
             default: 0,

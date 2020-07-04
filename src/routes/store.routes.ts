@@ -16,7 +16,7 @@ storeRouter.post('/', async (request, response) => {
     city,
     neighborhood,
     public_place,
-    number,
+    house_number,
     phone_number,
   } = request.body;
 
@@ -33,7 +33,7 @@ storeRouter.post('/', async (request, response) => {
     city,
     neighborhood,
     public_place,
-    number,
+    house_number,
     phone_number,
   });
 
