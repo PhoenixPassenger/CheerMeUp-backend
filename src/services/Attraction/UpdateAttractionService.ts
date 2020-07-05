@@ -4,21 +4,21 @@ import Attraction from '../../models/Attraction';
 import AppError from '../../errors/AppError';
 
 interface Request {
+  schedule_id: string;
   name: string;
   description: string;
-  id: string;
 }
 
 class UpdateAttractionService {
   public async execute({
+    schedule_id,
     name,
     description,
-    id,
   }: Request): Promise<Attraction> {
     const attractionRepository = getRepository(Attraction);
 
     const checkAttractionExists = await attractionRepository.findOne({
-      where: { id },
+      where: { name },
     });
 
     if (!checkAttractionExists) {

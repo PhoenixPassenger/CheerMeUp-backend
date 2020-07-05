@@ -59,13 +59,10 @@ clientRouter.delete('/', async (request, response) => {
   return response.json(client);
 });
 
-clientRouter.get('/', async (request, response) => {
+clientRouter.get('/:id', async (request, response) => {
   const { id } = request.body;
-
   const readClientService = new ReadClientService();
-
   const client = await readClientService.execute({ id });
-
   return response.json(client);
 });
 

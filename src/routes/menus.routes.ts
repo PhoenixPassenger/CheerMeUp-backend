@@ -21,7 +21,7 @@ menuRouter.delete('/', async (request, response) => {
 });
 */
 
-menuRouter.get('/', async (request, response) => {
+menuRouter.get('/:store_id', async (request, response) => {
   const { store_id } = request.body;
 
   const readMenuService = new ReadMenuService();
