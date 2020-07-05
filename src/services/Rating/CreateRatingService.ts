@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
-import Rating from '../models/Rating';
+import Rating from '../../models/Rating';
 
-import AppError from '../errors/AppError';
+import AppError from '../../errors/AppError';
 
 interface Request {
   score: number;

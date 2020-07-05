@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
-import Attraction from '../models/Attraction';
+import Attraction from '../../models/Attraction';
 
-import AppError from '../errors/AppError';
+import AppError from '../../errors/AppError';
 
 interface Request {
   schedule_id: string;

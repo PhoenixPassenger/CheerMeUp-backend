@@ -14,9 +14,10 @@ interface Request {
   public_place: string;
   house_number: number;
   phone_number: string;
+  id: string;
 }
 
-class CreateStoreService {
+class UpdateStoreService {
   public async execute({
     name,
     email,
@@ -45,28 +46,28 @@ class CreateStoreService {
       where: { email },
     });
 
-    if (checkUserExists) {
-      throw new AppError('Email address already used.');
+    if (!checkUserExists) {
+      throw new AppError('User does not exists');
     }
 
     if (!checkValidEmail) {
       throw new AppError('Invalid email address.');
     }
 
-    const store = storeRepository.create({
-      name,
-      email,
-      password,
-      city,
-      neighborhood,
-      house_number,
-      cnpj,
-      phone_number,
-      public_place,
-      uf,
-    });
+    const store = checkUserExists;
+    store.name = name;
+    store.email = email;
+    store.password = password;
+    store.cnpj = cnpj;
+    store.uf = uf;
+    store.city = city;
+    store.neighborhood = neighborhood;
+    store.public_place = public_place;
+    store.house_number = house_number;
+    store.phone_number = phone_number;
+
     await storeRepository.save(store);
     return store;
   }
 }
-export default CreateStoreService;
+export default UpdateStoreService;

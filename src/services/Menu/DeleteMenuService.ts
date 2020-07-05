@@ -4,25 +4,26 @@ import Menu from '../../models/Menu';
 import AppError from '../../errors/AppError';
 
 interface Request {
-  store_id: string;
+  id: string;
 }
 
-class CreateMenuService {
-  public async execute({ store_id }: Request): Promise<Menu> {
+class DeleteMenuService {
+  public async execute({ id }: Request): Promise<Menu> {
     const menuRepository = getRepository(Menu);
+
     const checkMenuExists = await menuRepository.findOne({
-      where: { store_id },
+      where: { id },
     });
 
-    if (checkMenuExists) {
-      throw new AppError('Schedule already registered.');
+    if (!checkMenuExists) {
+      throw new AppError('This menu does not exist.');
     }
 
-    const menu = menuRepository.create({
-      store_id,
-    });
+    const menu = await menuRepository.remove(checkMenuExists);
+
     await menuRepository.save(menu);
     return menu;
   }
 }
-export default CreateMenuService;
+
+export default DeleteMenuService;

@@ -5,29 +5,29 @@ import { sign } from 'jsonwebtoken';
 import AppError from '../../errors/AppError';
 
 import authConfig from '../../config/auth';
-import Store from '../../models/Store';
+import Client from '../../models/Client';
 
 interface Request {
   email: string;
   password: string;
 }
 
-class AuthenticateStoreService {
+class AuthenticateClientService {
   public async execute({
     email,
     password,
-  }: Request): Promise<{ store: Store; token: string }> {
-    const storeRepository = getRepository(Store);
+  }: Request): Promise<{ client: Client; token: string }> {
+    const clientRepository = getRepository(Client);
 
-    const store = await storeRepository.findOne({
+    const client = await clientRepository.findOne({
       where: { email },
     });
 
-    if (!store) {
+    if (!client) {
       throw new AppError('Email/password incorrect.', 401);
     }
 
-    const passwordMatch = await compare(password, store.password);
+    const passwordMatch = await compare(password, client.password);
 
     if (!passwordMatch) {
       throw new AppError('Email/password incorrect.', 401);
@@ -38,14 +38,14 @@ class AuthenticateStoreService {
     const { secret, expiresIn } = authConfig.jwt;
 
     const token = sign({}, secret, {
-      subject: store.id,
+      subject: client.id,
       expiresIn,
     });
 
     return {
-      store,
+      client,
       token,
     };
   }
 }
-export default AuthenticateStoreService;
+export default AuthenticateClientService;

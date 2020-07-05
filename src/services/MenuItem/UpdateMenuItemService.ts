@@ -1,5 +1,4 @@
 import { getRepository } from 'typeorm';
-import Menu from '../../models/Menu';
 import MenuItem from '../../models/MenuItem';
 
 import AppError from '../../errors/AppError';
@@ -8,35 +7,33 @@ interface Request {
   name: string;
   price: number;
   description: string;
-  menu_id: string;
+  id: string;
 }
 
-class CreateMenuItemService {
+class UpdateMenuItemService {
   public async execute({
     name,
     price,
     description,
-    menu_id,
+    id,
   }: Request): Promise<MenuItem> {
     const menuItemRepository = getRepository(MenuItem);
 
     const checkMenuItemExists = await menuItemRepository.findOne({
-      where: { name },
+      where: { id },
     });
 
-    if (checkMenuItemExists) {
-      throw new AppError('MenuItem already exists.');
+    if (!checkMenuItemExists) {
+      throw new AppError('This menu item does not exist.');
     }
 
-    const menuItem = menuItemRepository.create({
-      name,
-      price,
-      description,
-      menu_id,
-    });
-    await menuItemRepository.save(menuItem);
-    return menuItem;
+    checkMenuItemExists.name = name;
+    checkMenuItemExists.price = price;
+    checkMenuItemExists.description = description;
+
+    await menuItemRepository.save(checkMenuItemExists);
+    return checkMenuItemExists;
   }
 }
 
-export default CreateMenuItemService;
+export default UpdateMenuItemService;

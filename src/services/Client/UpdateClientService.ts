@@ -9,15 +9,17 @@ interface Request {
   password: string;
   phone_number: string;
   birthdate: Date;
+  id: string;
 }
 
-export default class CreateClientService {
+class UpdateClientService {
   public async execute({
     name,
     email,
     password,
     phone_number,
     birthdate,
+    id,
   }: Request): Promise<Client> {
     const clientRepository = getRepository(Client);
 
@@ -31,26 +33,23 @@ export default class CreateClientService {
 
     const checkValidEmail = validateEmail();
 
-    const checkUserExists = await clientRepository.findOne({
-      where: { email },
+    const checkClientExists = await clientRepository.findOne({
+      where: { id },
     });
 
-    if (checkUserExists) {
-      throw new AppError('Email address already used.');
+    if (!checkClientExists) {
+      throw new AppError('This client does not exist.');
     }
 
-    if (!checkValidEmail) {
-      throw new AppError('Invalid email address.');
-    }
+    checkClientExists.name = name;
+    checkClientExists.email = email;
+    checkClientExists.password = password;
+    checkClientExists.phone_number = phone_number;
+    checkClientExists.birthdate = birthdate;
 
-    const client = clientRepository.create({
-      name,
-      email,
-      password,
-      phone_number,
-      birthdate,
-    });
-    await clientRepository.save(client);
-    return client;
+    await clientRepository.save(checkClientExists);
+    return checkClientExists;
   }
 }
+
+export default UpdateClientService;
