@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-import { Router, request, response } from 'express';
+import { Router } from 'express';
 
 import CreateRecommendationService from '../services/Recommendation/CreateRecommendationService';
 

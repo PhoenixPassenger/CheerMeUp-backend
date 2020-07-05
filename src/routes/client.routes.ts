@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { hash } from 'bcryptjs';
 
-import CreateClientService from '../services/CreateClientService';
+import CreateClientService from '../services/Client/CreateClientService';
 
 const clientRouter = Router();
 

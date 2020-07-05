@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import CreateMenuItemService from '../services/CreateMenuItemService';
+import CreateMenuItemService from '../services/MenuItem/CreateMenuItemService';
 
 const menuItemRouter = Router();
 
