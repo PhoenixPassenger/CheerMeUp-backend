@@ -20,12 +20,12 @@ class CreateRecommendation1593829877266 implements MigrationInterface {
           },
           {
             name: 'title',
-            type: 'string',
+            type: 'varchar',
             isNullable: false,
           },
           {
             name: 'content',
-            type: 'string',
+            type: 'varchar',
             isNullable: false,
           },
           {
@@ -38,6 +38,16 @@ class CreateRecommendation1593829877266 implements MigrationInterface {
             type: 'uuid',
             isNullable: false,
           },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
         ],
       }),
     );
@@ -45,6 +55,7 @@ class CreateRecommendation1593829877266 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'recommendations',
       new TableForeignKey({
+        name: 'RecommendationClient',
         columnNames: ['client_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'clients',
@@ -55,6 +66,7 @@ class CreateRecommendation1593829877266 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'recommendations',
       new TableForeignKey({
+        name: 'RecommendationStore',
         columnNames: ['store_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'stores',
@@ -65,6 +77,10 @@ class CreateRecommendation1593829877266 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable('recommendations');
+    await queryRunner.dropForeignKey('recommendations', 'RecommendationStore');
+    await queryRunner.dropForeignKey('recommendations', 'RecommendationClient');
+    await queryRunner.dropColumn('recommendations', 'store_id');
+    await queryRunner.dropColumn('recommendations', 'client_id');
   }
 }
 

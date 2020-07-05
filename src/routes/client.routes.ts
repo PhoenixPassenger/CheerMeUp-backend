@@ -1,11 +1,11 @@
-import { Router, request, response } from 'express';
+import { Router } from 'express';
 import { hash } from 'bcryptjs';
 
 import CreateClientService from '../services/CreateClientService';
 
 const clientRouter = Router();
 
-clientRouter.post('/client', async (request, response) => {
+clientRouter.post('/', async (request, response) => {
   const { name, email, password, phone_number, birthdate } = request.body;
 
   const createClientService = new CreateClientService();

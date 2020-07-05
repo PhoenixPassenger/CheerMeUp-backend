@@ -2,7 +2,7 @@
 import { Router, request, response } from 'express';
 import { hash } from 'bcryptjs';
 
-import CreateStoreService from '../services/CreateStoreService';
+import CreateStoreService from '../services/Store/CreateStoreService';
 
 const storeRouter = Router();
 

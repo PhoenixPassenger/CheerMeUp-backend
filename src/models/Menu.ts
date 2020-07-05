@@ -4,35 +4,20 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
   JoinColumn,
+  OneToOne,
 } from 'typeorm';
-
-import Client from './Client';
 import Store from './Store';
 
-@Entity('recommendations')
-class Recommendation {
+@Entity('menus')
+class Menu {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  title: string;
-
-  @Column()
-  content: string;
-
-  @Column()
-  client_id: string;
-
-  @Column()
   store_id: string;
 
-  @ManyToOne(() => Client)
-  @JoinColumn({ name: 'client_id' })
-  client: Client;
-
-  @ManyToOne(() => Client)
+  @OneToOne(() => Store)
   @JoinColumn({ name: 'store_id' })
   store: Store;
 
@@ -43,4 +28,4 @@ class Recommendation {
   updated_at: Date;
 }
 
-export default Recommendation;
+export default Menu;

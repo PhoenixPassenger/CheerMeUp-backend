@@ -5,7 +5,7 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateMenuItem1593866898352 implements MigrationInterface {
+export default class CreateMenuItem1593925007722 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -20,7 +20,7 @@ export default class CreateMenuItem1593866898352 implements MigrationInterface {
           },
           {
             name: 'name',
-            type: 'string',
+            type: 'varchar',
             isNullable: false,
           },
           {
@@ -30,12 +30,12 @@ export default class CreateMenuItem1593866898352 implements MigrationInterface {
           },
           {
             name: 'description',
-            type: 'string',
+            type: 'varchar',
             isNullable: false,
           },
           {
             name: 'menu_id',
-            type: 'string',
+            type: 'uuid',
             isNullable: false,
           },
         ],
@@ -45,6 +45,7 @@ export default class CreateMenuItem1593866898352 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'menu_items',
       new TableForeignKey({
+        name: 'MenuMenuItem',
         columnNames: ['menu_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'menus',
@@ -55,5 +56,7 @@ export default class CreateMenuItem1593866898352 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable('menu_items');
+    await queryRunner.dropForeignKey('menu_items', 'MenuMenuItem');
+    await queryRunner.dropColumn('menu_items', 'client_id');
   }
 }

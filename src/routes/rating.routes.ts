@@ -1,10 +1,10 @@
-import { Router, request, response } from 'express';
+import { Router } from 'express';
 
-import CreateRatingService from '../services/CreateRatingService';
+import CreateRatingService from '../services/Rating/CreateRatingService';
 
 const ratingRouter = Router();
 
-ratingRouter.post('/rating', async (request, response) => {
+ratingRouter.post('/', async (request, response) => {
   const { score, comment, client_id, store_id } = request.body;
 
   const createRatingService = new CreateRatingService();

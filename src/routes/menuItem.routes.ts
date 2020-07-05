@@ -1,10 +1,10 @@
-import { Router, request, response } from 'express';
+import { Router } from 'express';
 
 import CreateMenuItemService from '../services/CreateMenuItemService';
 
 const menuItemRouter = Router();
 
-menuItemRouter.post('/menuitem', async (request, response) => {
+menuItemRouter.post('/', async (request, response) => {
   const { name, price, description, menu_id } = request.body;
 
   const createMenuItemService = new CreateMenuItemService();

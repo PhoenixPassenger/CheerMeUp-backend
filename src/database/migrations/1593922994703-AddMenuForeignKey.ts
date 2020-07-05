@@ -1,29 +1,29 @@
 import {
   MigrationInterface,
   QueryRunner,
-  TableColumn,
   TableForeignKey,
+  TableColumn,
 } from 'typeorm';
 
-// eslint-disable-next-line @typescript-eslint/class-name-casing
-export default class addAttractionForeignKey1593861804713
+export default class AddMenuForeignKey1593922994703
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.addColumn(
-      'attractions',
+      'menus',
       new TableColumn({
-        name: 'schedule_id',
+        name: 'store_id',
         type: 'uuid',
         isNullable: true,
       }),
     );
+
     await queryRunner.createForeignKey(
-      'attractions',
+      'menus',
       new TableForeignKey({
-        name: 'AttractionSchedule',
-        columnNames: ['schedule_id'],
+        name: 'MenuStore',
+        columnNames: ['store_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'schedules',
+        referencedTableName: 'stores',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       }),
@@ -31,8 +31,7 @@ export default class addAttractionForeignKey1593861804713
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('attractions', 'AttractionSchedule');
-
-    await queryRunner.dropColumn('attractions', 'schedule_id');
+    await queryRunner.dropForeignKey('menus', 'MenuStore');
+    await queryRunner.dropColumn('menus', 'store_id');
   }
 }

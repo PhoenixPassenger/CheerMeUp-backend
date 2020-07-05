@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 import { Router } from 'express';
-import CreateAttractionService from '../services/CreateAttractionService';
+import CreateAttractionService from '../services/Attraction/CreateAttractionService';
 
 const attractionRouter = Router();
 

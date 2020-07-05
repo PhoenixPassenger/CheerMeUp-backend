@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 import { Router } from 'express';
-import CreateScheduleService from '../services/CreateScheduleService';
+import CreateScheduleService from '../services/Schedule/CreateScheduleService';
 
 const scheduleRouter = Router();
 

@@ -1,11 +1,11 @@
 /* eslint-disable no-shadow */
 import { Router, request, response } from 'express';
 
-import CreateRecommendationService from '../services/CreateRecommendationService';
+import CreateRecommendationService from '../services/Recommendation/CreateRecommendationService';
 
 const recommendationRouter = Router();
 
-recommendationRouter.post('/recommendation', async (request, response) => {
+recommendationRouter.post('/', async (request, response) => {
   const { title, content, client_id, store_id } = request.body;
 
   const createRecommendationService = new CreateRecommendationService();

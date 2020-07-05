@@ -37,6 +37,16 @@ export default class CreateRating1593829843327 implements MigrationInterface {
             type: 'uuid',
             isNullable: false,
           },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
         ],
       }),
     );
@@ -44,6 +54,7 @@ export default class CreateRating1593829843327 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'ratings',
       new TableForeignKey({
+        name: 'RatingClient',
         columnNames: ['client_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'clients',
@@ -54,6 +65,7 @@ export default class CreateRating1593829843327 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'ratings',
       new TableForeignKey({
+        name: 'RatingStore',
         columnNames: ['store_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'stores',
@@ -64,5 +76,9 @@ export default class CreateRating1593829843327 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable('ratings');
+    await queryRunner.dropForeignKey('ratings', 'RatingStore');
+    await queryRunner.dropForeignKey('ratings', 'RatingClient');
+    await queryRunner.dropColumn('ratings', 'store_id');
+    await queryRunner.dropColumn('ratings', 'client_id');
   }
 }

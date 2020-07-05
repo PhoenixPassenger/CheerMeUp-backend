@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 import { Router } from 'express';
-import AuthenticateStoreService from '../services/AuthenticateStoreService';
+import AuthenticateStoreService from '../services/Store/AuthenticateStoreService';
 
 const sessionsRouter = Router();
 
