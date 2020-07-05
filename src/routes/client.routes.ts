@@ -65,6 +65,8 @@ clientRouter.get('/', async (request, response) => {
   const readClientService = new ReadClientService();
 
   const client = await readClientService.execute({ id });
+
+  return response.json(client);
 });
 
 export default clientRouter;
