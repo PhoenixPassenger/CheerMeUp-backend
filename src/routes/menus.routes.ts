@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
-import { Router, response } from 'express';
+import { Router } from 'express';
 import CreateMenuService from '../services/Menu/CreateMenuService';
-import DeleteMenuService from '../services/Menu/DeleteMenuService';
+// import DeleteMenuService from '../services/Menu/DeleteMenuService';
 import ReadMenuService from '../services/Menu/ReadMenuService';
 
 const menuRouter = Router();

@@ -20,7 +20,7 @@ attractionRouter.post('/', async (request, response) => {
   return response.json(attraction);
 });
 
-attractionRouter.put('/', async (request, response) => {
+attractionRouter.put('/:id', async (request, response) => {
   const { schedule_id, name, description } = request.body;
   const updateAttractionService = new UpdateAttractionService();
 
@@ -33,7 +33,7 @@ attractionRouter.put('/', async (request, response) => {
   return response.json(attraction);
 });
 
-attractionRouter.delete('/', async (request, response) => {
+attractionRouter.delete('/:id', async (request, response) => {
   const { id } = request.body;
 
   const deleteAttractionService = new DeleteAttractionService();

@@ -28,7 +28,7 @@ clientRouter.post('/', async (request, response) => {
   return response.json(client);
 });
 
-clientRouter.put('/', async (request, response) => {
+clientRouter.put('/:id', async (request, response) => {
   const { name, email, password, phone_number, birthdate, id } = request.body;
 
   const updateClientService = new UpdateClientService();
@@ -49,7 +49,7 @@ clientRouter.put('/', async (request, response) => {
   return response.json(client);
 });
 
-clientRouter.delete('/', async (request, response) => {
+clientRouter.delete('/:id', async (request, response) => {
   const { id } = request.body;
 
   const deleteClientService = new DeleteClientService();
