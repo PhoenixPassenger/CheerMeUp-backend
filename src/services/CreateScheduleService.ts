@@ -8,7 +8,7 @@ interface Request {
 }
 
 class CreateScheduleService {
-  public async execute({ store_id } : Request): Promise<Schedule> {
+  public async execute({ store_id }: Request): Promise<Schedule> {
     const scheduleRepository = getRepository(Schedule);
     const checkWordExists = await scheduleRepository.findOne({
       where: { store_id },
