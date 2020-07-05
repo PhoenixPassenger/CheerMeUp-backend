@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-import { Router, request } from 'express';
+import { Router } from 'express';
 import { hash } from 'bcryptjs';
 
 import CreateStoreService from '../services/Store/CreateStoreService';
